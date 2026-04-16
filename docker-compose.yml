@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: gateway_nginx
+    ports:
+      - "70:70"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app_um_frontend
+      - app_dois_frontend
+
+  app_um_backend:
+    build: ./app_um/backend
+
+  app_um_frontend:
+    build: ./app_um/frontend
+
+  app_dois_backend:
+    build: ./app_dois/backend
+
+  app_dois_frontend:
+    build: ./app_dois/frontend
